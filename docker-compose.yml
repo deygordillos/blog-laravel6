@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  # Servicio para PHP con Apache
+  app:
+    image: php:7.4.20-apache
+    container_name: laravel6_app
+    build: ./docker
+    working_dir: /var/www/html
+    volumes:
+      - ./:/var/www/html
+      - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+      - ./docker/apache/vhost.conf:/etc/apache2/sites-available/000-default.conf
+    ports:
+      - "8180:80"
+    networks:
+      - laravel
+    environment:
+      APACHE_RUN_USER: www-data
+      APACHE_RUN_GROUP: www-data
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+networks:
+  laravel:
+    driver: bridge
+
+volumes:
+  db_data:
