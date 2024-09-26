@@ -20,6 +20,9 @@ services:
       APACHE_RUN_GROUP: www-data
     extra_hosts:
       - "host.docker.internal:host-gateway"
+    command: >
+      bash -c "chmod -R 777 /var/www/html/blog/storage &&
+               apache2-foreground"
 
 networks:
   laravel:
