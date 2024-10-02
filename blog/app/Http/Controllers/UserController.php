@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
 
 class UserController extends Controller
 {
@@ -15,14 +15,8 @@ class UserController extends Controller
         ]);
     }
 
-    public function store(Request $req) {
-        // Validation
-        $req->validate([
-            'name' => 'required',
-            'email' => ['required', 'email', 'unique:users'],
-            'password' => ['required', 'min:8']
-        ]);
-
+    public function store(UserRequest $req) {
+        
         User::create([
             'name' => $req->name,
             'email' => $req->email,
