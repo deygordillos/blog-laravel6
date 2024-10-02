@@ -17,3 +17,17 @@ Route::post('users', 'UserController@store')->name('users.store');
 Route::delete('users/{user}', 'UserController@destroy')->name('users.destroy');
 
 Route::resource('pages', 'PageController');
+Route::get('eloquent', function() {
+    //$posts = \App\Post::all();
+    
+    //$posts = \App\Post::where('id', '>=', '20')
+    //    ->get();
+
+    $posts = \App\Post::where('id', '>=', '20')
+        ->orderBy('id', 'desc')
+        ->get();
+
+    foreach ($posts as $key => $post) {
+        echo "$post->id $post->title <br>";
+    }
+});
