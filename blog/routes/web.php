@@ -54,3 +54,23 @@ Route::get('users', function() {
         {$user->posts->count()} posts <br>";
     }
 });
+
+
+Route::get('collections', function() {
+    $users = \App\User::all();
+
+    //dd($users);
+    //dd($users->contains(4)); // true
+    //dd($users->except([1, 2, 3])); // shows only 4
+    //dd($users->only(4)); // shows only 4
+    //dd($users->find(4)); // shows only 4
+    dd($users->load('posts'));
+});
+
+Route::get('serialization', function() {
+    $users = \App\User::all();
+
+   //dd($users->toArray());
+   $user = $users->find(1)->toJson();
+   dd($user);
+});
