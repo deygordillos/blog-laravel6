@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'HomeController@index');
+Route::get('/', 'UserController@index');
 Route::get('users', 'UserController@index')->name('users.index');
 Route::post('users', 'UserController@store')->name('users.store');
 Route::delete('users/{user}', 'UserController@destroy')->name('users.destroy');
@@ -44,16 +44,16 @@ Route::get('posts', function() {
     }
 });
 
-Route::get('users', function() {
-    $users = \App\User::get();
+// Route::get('users', function() {
+//     $users = \App\User::get();
 
-    foreach ($users as $key => $user) {
-        echo "
-        $user->id
-        <strong>{$user->name}</strong>
-        {$user->posts->count()} posts <br>";
-    }
-});
+//     foreach ($users as $key => $user) {
+//         echo "
+//         $user->id
+//         <strong>{$user->name}</strong>
+//         {$user->posts->count()} posts <br>";
+//     }
+// });
 
 
 Route::get('collections', function() {
@@ -74,3 +74,7 @@ Route::get('serialization', function() {
    $user = $users->find(1)->toJson();
    dd($user);
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+Auth::routes();
