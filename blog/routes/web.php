@@ -31,3 +31,26 @@ Route::get('eloquent', function() {
         echo "$post->id $post->title <br>";
     }
 });
+
+
+Route::get('posts', function() {
+    $posts = \App\Post::get();
+
+    foreach ($posts as $key => $post) {
+        echo "
+        $post->id 
+        <strong>{$post->user->name}</strong>
+        $post->title <br>";
+    }
+});
+
+Route::get('users', function() {
+    $users = \App\User::get();
+
+    foreach ($users as $key => $user) {
+        echo "
+        $user->id
+        <strong>{$user->name}</strong>
+        {$user->posts->count()} posts <br>";
+    }
+});
