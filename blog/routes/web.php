@@ -11,7 +11,9 @@
 |
 */
 
-Route::get('/', 'UserController@index');
+Route::get('/', function() {
+    return view('layouts.app');
+});
 Route::get('users', 'UserController@index')->name('users.index');
 Route::post('users', 'UserController@store')->name('users.store');
 Route::delete('users/{user}', 'UserController@destroy')->name('users.destroy');
@@ -44,37 +46,6 @@ Route::get('posts', function() {
     }
 });
 
-// Route::get('users', function() {
-//     $users = \App\User::get();
-
-//     foreach ($users as $key => $user) {
-//         echo "
-//         $user->id
-//         <strong>{$user->name}</strong>
-//         {$user->posts->count()} posts <br>";
-//     }
-// });
-
-
-Route::get('collections', function() {
-    $users = \App\User::all();
-
-    //dd($users);
-    //dd($users->contains(4)); // true
-    //dd($users->except([1, 2, 3])); // shows only 4
-    //dd($users->only(4)); // shows only 4
-    //dd($users->find(4)); // shows only 4
-    dd($users->load('posts'));
-});
-
-Route::get('serialization', function() {
-    $users = \App\User::all();
-
-   //dd($users->toArray());
-   $user = $users->find(1)->toJson();
-   dd($user);
-});
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Auth::routes();

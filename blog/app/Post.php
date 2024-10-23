@@ -14,7 +14,7 @@ class Post extends Model
      *
      * @return array
      */
-    public function sluggable(): array
+    public function sluggable()
     {
         return [
             'slug' => [
