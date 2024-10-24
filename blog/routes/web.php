@@ -11,29 +11,12 @@
 |
 */
 
-Route::get('/', function() {
-    return view('layouts.app');
-});
+Route::get('/', 'PageController@posts');
+Route::get('blog/{post}', 'PageController@post')->name('post');
+
 Route::get('users', 'UserController@index')->name('users.index');
 Route::post('users', 'UserController@store')->name('users.store');
 Route::delete('users/{user}', 'UserController@destroy')->name('users.destroy');
-
-Route::resource('pages', 'PageController');
-Route::get('eloquent', function() {
-    //$posts = \App\Post::all();
-    
-    //$posts = \App\Post::where('id', '>=', '20')
-    //    ->get();
-
-    $posts = \App\Post::where('id', '>=', '20')
-        ->orderBy('id', 'desc')
-        ->get();
-
-    foreach ($posts as $key => $post) {
-        echo "$post->id $post->title <br>";
-    }
-});
-
 
 Route::get('posts', function() {
     $posts = \App\Post::get();
