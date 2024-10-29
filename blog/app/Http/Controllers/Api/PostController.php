@@ -59,7 +59,7 @@ class PostController extends Controller
     public function update(PostRequest $request, Post $post)
     {
         $post->update($request->all() );
-        
+
         return response()->json($post);
     }
 
@@ -71,6 +71,8 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+
+        return response()->json(null, 204);
     }
 }
