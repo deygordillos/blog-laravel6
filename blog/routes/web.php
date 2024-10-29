@@ -18,16 +18,6 @@ Route::get('users', 'UserController@index')->name('users.index');
 Route::post('users', 'UserController@store')->name('users.store');
 Route::delete('users/{user}', 'UserController@destroy')->name('users.destroy');
 
-Route::get('posts', function() {
-    $posts = \App\Post::get();
-
-    foreach ($posts as $key => $post) {
-        echo "
-        $post->id 
-        <strong>{$post->user->name}</strong>
-        $post->title <br>";
-    }
-});
 
 Auth::routes();
 
@@ -36,3 +26,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('posts', 'Backend\PostController')
     ->middleware('auth')
     ->except('show');
+
+Route::view('/about', 'home');
